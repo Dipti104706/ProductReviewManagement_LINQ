@@ -38,8 +38,30 @@ namespace ProductReviewManagement_LINQ
                 new ProductReview(){ProductId=7,UserId=1,Review="bad",Rating=10,IsLike=false},
                 new ProductReview(){ProductId=6,UserId=5,Review="good",Rating=17,IsLike=true},
             };
-            ProductIdandReview(list);
-            Console.ReadLine();
+            Console.WriteLine("Choose operation you want: 1-Display all product review \n 2-Retrieve top three records \n 3-Retrieve records based on rating and productId \n 4-Count of the product id \n 5-Retrieve only ProductId and review \n 6-Skip Top Five Records");
+            int option = Convert.ToInt32(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    IterateLoopList(list);
+                    break;
+                case 2:
+                    RetriveTop3Records(list);
+                    break;
+                case 3:
+                    RetriveBasedonProductIdandRating(list);
+                    break;
+                case 4:
+                    CountingID(list);
+                    break;
+                case 5:
+                    ProductIdandReview(list);
+                    break;
+                case 6:
+                    IterateLoopList(list);
+                    SkipTopFiveRecords(list);
+                    break;
+            }
         }
 
         //UC1 Add 25 values in the list
@@ -98,6 +120,13 @@ namespace ProductReviewManagement_LINQ
                 Console.WriteLine("Product ID: " + element.ProductId + "\t Review: " + element.review);
                 Console.WriteLine("=====================================");
             }
+        }
+        //Uc6
+        public static void SkipTopFiveRecords(List<ProductReview> products)
+        {
+            Console.WriteLine("\n----------Skip Top Five records in list");
+            var res = (from product in products orderby product.Rating descending select product).Skip(5).ToList();
+            IterateLoopList(res);
         }
     }
 }
