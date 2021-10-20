@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace ProductReviewManagement_LINQ
@@ -63,6 +64,10 @@ namespace ProductReviewManagement_LINQ
                     break;
                 case 8:
                     ManagementOpearation.CreateDataTable(list);
+                    break;
+                case 9:
+                    DataTable table = ManagementOpearation.CreateDataTable(list);
+                    ManagementOpearation.ReturnsOnlyIsLikeFieldAsTrue(table);
                     break;
             }
             Console.ReadLine();

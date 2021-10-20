@@ -75,7 +75,7 @@ namespace ProductReviewManagement_LINQ
         }
 
         //UC8 create data table insert records into it
-        public static void CreateDataTable(List<ProductReview> productList)
+        public static DataTable CreateDataTable(List<ProductReview> productList)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("productId");
@@ -91,6 +91,17 @@ namespace ProductReviewManagement_LINQ
 
             //Display table
             foreach (DataRow p in dt.Rows)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
+            }
+            return dt;
+        }
+
+       // UC9-Retrieve the records whose column islike has true using DataTable
+        public static void ReturnsOnlyIsLikeFieldAsTrue(DataTable table)
+        {
+            var result = from a in table.AsEnumerable() where a.Field<bool>("isLike") == true select a;
+            foreach (var p in result)
             {
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
             }
