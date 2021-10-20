@@ -39,7 +39,7 @@ namespace ProductReviewManagement_LINQ
                 new ProductReview(){ProductId=7,UserId=1,Review="bad",Rating=10,IsLike=false},
                 new ProductReview(){ProductId=6,UserId=5,Review="good",Rating=17,IsLike=true},
             };
-            Console.WriteLine("Choose operation you want: 1-Display all product review \n 2-Retrieve top three records \n 3-Retrieve records based on rating and productId \n 4-Count of the product id \n 5-Retrieve only ProductId and review \n 6-Skip Top Five Records \n 8-reate datatable and insert list");
+            Console.WriteLine("Choose operation you want: \n 1-Display all product review \n 2-Retrieve top three records \n 3-Retrieve records based on rating and productId \n 4-Count of the product id \n 5-Retrieve only ProductId and review \n 6-Skip Top Five Records \n 8-Create datatable and insert list \n 9-Retrieve the records whose column islike has true \n 10-Average rating value of productID");
             int option = Convert.ToInt32(Console.ReadLine());
             switch (option)
             {
@@ -63,11 +63,16 @@ namespace ProductReviewManagement_LINQ
                     ManagementOpearation.SkipTopFiveRecords(list);
                     break;
                 case 8:
-                    ManagementOpearation.CreateDataTable(list);
+                    DataTable dataTable = ManagementOpearation.CreateDataTable(list);
+                    ManagementOpearation.DisplayTableDetails(dataTable);
                     break;
                 case 9:
                     DataTable table = ManagementOpearation.CreateDataTable(list);
                     ManagementOpearation.ReturnsOnlyIsLikeFieldAsTrue(table);
+                    break;
+                case 10:
+                    DataTable dt = ManagementOpearation.CreateDataTable(list);
+                    ManagementOpearation.AverageOfRating(dt);
                     break;
             }
             Console.ReadLine();

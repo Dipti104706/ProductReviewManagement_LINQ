@@ -88,13 +88,16 @@ namespace ProductReviewManagement_LINQ
             {
                 dt.Rows.Add(data.ProductId, data.UserId, data.Rating, data.Review, data.IsLike);
             }
+            return dt;
+        }
 
-            //Display table
-            foreach (DataRow p in dt.Rows)
+        //Display the table contents
+        public static void DisplayTableDetails(DataTable table)
+        {
+            foreach (DataRow p in table.Rows)
             {
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
             }
-            return dt;
         }
 
        // UC9-Retrieve the records whose column islike has true using DataTable
@@ -105,6 +108,13 @@ namespace ProductReviewManagement_LINQ
             {
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
             }
+        }
+
+        //UC10 Finding the average rating value of productID
+        public static void AverageOfRating(DataTable table)
+        {
+            double result = (double)table.Select().Where(p => p["rating"] != DBNull.Value).Select(c => Convert.ToDecimal(c["rating"])).Average();
+            Console.WriteLine(result);
         }
     }
 }
