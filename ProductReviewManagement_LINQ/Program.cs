@@ -38,7 +38,7 @@ namespace ProductReviewManagement_LINQ
                 new ProductReview(){ProductId=7,UserId=1,Review="bad",Rating=10,IsLike=false},
                 new ProductReview(){ProductId=6,UserId=5,Review="good",Rating=17,IsLike=true},
             };
-            RetriveBasedonProductIdandRating(list);
+            CountingID(list);
             Console.ReadLine(); 
         }
 
@@ -73,6 +73,19 @@ namespace ProductReviewManagement_LINQ
             var data = (list.Where(a => a.Rating > 3 && (a.ProductId == 1 || a.ProductId == 4 || a.ProductId == 9))).ToList();
             Console.WriteLine("The desire Result is :");
             IterateLoopList(data);
+        }
+
+        //UC4
+        //Counting Each ID present in the List
+        public static void CountingID(List<ProductReview> list)
+        {
+            var data = (list.GroupBy(a => a.ProductId).Select(x => new { ProductId = x.Key, count = x.Count() }));
+            Console.WriteLine("Count of Each Product Id is: ");
+            foreach (var element in data)
+            {
+                Console.WriteLine("Product ID: " + element.ProductId + "\t Count: " + element.count);
+                Console.WriteLine("========================================================");
+            }
         }
     }
 }
