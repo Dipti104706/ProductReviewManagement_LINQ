@@ -126,5 +126,15 @@ namespace ProductReviewManagement_LINQ
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
             }
         }
+
+        //Uc12 Retrieve details whose user id is 10 and also sort by rating
+        public static void RetrieveRecordofUserId(DataTable table)
+        {
+            var result = from product in table.AsEnumerable() orderby product.Field<int>("rating") where product.Field<int>("userId") == 10 select product;
+            foreach (var p in result)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
+            }
+        }
     }
 }
