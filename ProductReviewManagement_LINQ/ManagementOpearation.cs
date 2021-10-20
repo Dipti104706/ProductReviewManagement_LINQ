@@ -116,5 +116,15 @@ namespace ProductReviewManagement_LINQ
             double result = (double)table.Select().Where(p => p["rating"] != DBNull.Value).Select(c => Convert.ToDecimal(c["rating"])).Average();
             Console.WriteLine(result);
         }
+
+        //Uc11 retrieve all records whose review is nice
+        public static void RetrieveReviewNice(DataTable dTable)
+        {
+            var result = from product in dTable.AsEnumerable() where product.Field<string>("review") == "nice" select product;
+            foreach (var p in result)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
+            }
+        }
     }
 }
