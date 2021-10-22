@@ -40,8 +40,7 @@ namespace ProductReviewManagement_LINQ
 
             //UC12
             Console.WriteLine("\n-------- Retrieve Record based on rating where userid=10 --------");
-            DataTable dt = ManagementOpearation.CreateDataTable(list);
-            ManagementOpearation.RetrieveRecordofUserId(dt);
+            ManagementOpearation.RetrieveRecordofUserId(list);
             Console.ReadLine();
         }
     }

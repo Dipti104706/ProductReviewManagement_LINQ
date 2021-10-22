@@ -118,23 +118,17 @@ namespace ProductReviewManagement_LINQ
         }
 
         //Uc11 retrieve all records whose review is nice
-        public static void RetrieveReviewNice(DataTable dTable)
+        public static void RetrieveReviewNice(List<ProductReview> list)
         {
-            var result = from product in dTable.AsEnumerable() where product.Field<string>("review") == "nice" select product;
-            foreach (var p in result)
-            {
-                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
-            }
+            var result = (from product in list where product.Review == "nice" select product).ToList();
+            IterateLoopList(result);
         }
 
         //Uc12 Retrieve details whose user id is 10 and also sort by rating
-        public static void RetrieveRecordofUserId(DataTable table)
+        public static void RetrieveRecordofUserId(List<ProductReview> list)
         {
-            var result = from product in table.AsEnumerable() orderby product.Field<int>("rating") where product.Field<int>("userId") == 10 select product;
-            foreach (var p in result)
-            {
-                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
-            }
+            var res = (from product in list orderby product.Rating where product.UserId == 10 select product).ToList();
+            IterateLoopList(res);
         }
     }
 }
